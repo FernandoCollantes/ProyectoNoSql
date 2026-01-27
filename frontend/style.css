@@ -1,27 +1,91 @@
 :root {
-    --bg-color: #f4f6f8;
-    --card-bg: #ffffff;
-    --primary: #2563eb;
-    --text-dark: #1e293b;
-    --text-light: #64748b;
+    /* Paleta Dark Mode Profesional */
+    --bg-color: #0f172a; /* Azul muy oscuro (casi negro) */
+    --card-bg: rgba(30, 41, 59, 0.7); /* Semitransparente para efecto cristal */
+    --primary: #3b82f6; /* Azul brillante */
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border: rgba(255, 255, 255, 0.1);
     --danger: #ef4444;
 }
 
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);
-    color: var(--text-dark);
+    color: var(--text-main);
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     min-height: 100vh;
+    overflow-x: hidden; /* Evita scroll horizontal por las nubes */
+    position: relative;
 }
 
+/* --- NUEVO: Fondo Animado "Tech Dust" --- */
+.background-effects {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Se queda detrás del contenido */
+    overflow: hidden;
+    pointer-events: none; /* Permite hacer clic a través de ellas */
+}
+
+.dust-cloud {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px); /* Desenfoque fuerte para suavizar */
+    opacity: 0.6;
+    animation: float 20s infinite ease-in-out;
+}
+
+/* Nube 1: Azulada (Arriba izquierda) */
+.dust-cloud.one {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, rgba(0,0,0,0) 70%);
+    top: -50px;
+    left: -50px;
+    animation-delay: 0s;
+}
+
+/* Nube 2: Violeta (Centro derecha) */
+.dust-cloud.two {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, rgba(0,0,0,0) 70%);
+    top: 40%;
+    right: -100px;
+    animation-duration: 25s;
+    animation-delay: -5s;
+}
+
+/* Nube 3: Cian (Abajo izquierda) */
+.dust-cloud.three {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, rgba(0,0,0,0) 70%);
+    bottom: -50px;
+    left: 20%;
+    animation-duration: 22s;
+    animation-delay: -10s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -50px) scale(1.1); }
+}
+
+/* --- Contenedor Principal (Efecto Glassmorphism) --- */
 .container {
     width: 100%;
     max-width: 800px;
     padding: 2rem;
+    position: relative;
+    z-index: 1; /* Por encima del fondo */
 }
 
 header {
@@ -30,100 +94,121 @@ header {
 }
 
 header h1 {
-    color: var(--primary);
+    color: var(--text-main);
     margin-bottom: 0.5rem;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5); /* Brillo neón */
 }
 
-/* Formulario Estilizado */
-.form-section {
+header p {
+    color: var(--text-muted);
+}
+
+/* Formularios y Tarjetas con efecto Cristal */
+.form-section, .task-card {
     background: var(--card-bg);
+    backdrop-filter: blur(12px); /* El truco del vidrio esmerilado */
+    -webkit-backdrop-filter: blur(12px); /* Safari */
+    border: 1px solid var(--border);
     padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-radius: 12px; /* Más redondeado */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
     margin-bottom: 2rem;
+    transition: transform 0.2s;
 }
 
-.form-group {
-    margin-bottom: 1rem;
-}
+.form-group { margin-bottom: 1rem; }
 
 label {
     display: block;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+    color: var(--text-muted);
     font-size: 0.9rem;
+    margin-bottom: 0.5rem;
 }
 
 input, select {
     width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
+    padding: 0.8rem;
+    background: rgba(15, 23, 42, 0.5); /* Input oscuro */
+    border: 1px solid var(--border);
+    color: white;
+    border-radius: 8px;
     font-size: 1rem;
-    box-sizing: border-box; /* Importante para padding */
+    box-sizing: border-box;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
 }
 
 .btn-primary {
     width: 100%;
-    padding: 0.75rem;
-    background-color: var(--primary);
+    padding: 0.9rem;
+    background: linear-gradient(135deg, var(--primary), #2563eb);
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
 }
 
 .btn-primary:hover {
-    background-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(59, 130, 246, 0.6);
 }
 
-/* Lista de Tareas (Grid) */
+/* Lista de Tareas */
 .tasks-section h2 {
-    border-bottom: 2px solid #e2e8f0;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border);
     padding-bottom: 0.5rem;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr; /* Una columna por defecto */
-    gap: 1rem;
-}
-
-/* Estilo de la tarjeta de tarea (lo generaremos con JS) */
 .task-card {
-    background: var(--card-bg);
-    padding: 1rem;
-    border-left: 5px solid var(--primary);
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-left: 4px solid var(--primary);
+}
+
+.task-card:hover {
+    transform: translateY(-2px); /* Pequeña elevación al pasar el ratón */
+    background: rgba(30, 41, 59, 0.9);
 }
 
 .task-info h3 {
-    margin: 0 0 0.25rem 0;
-    font-size: 1.1rem;
+    margin: 0 0 0.3rem 0;
+    color: var(--text-main);
 }
 
 .task-meta {
     font-size: 0.85rem;
-    color: var(--text-light);
+    color: var(--text-muted);
 }
 
-.btn-delete {
-    background-color: transparent;
-    border: 1px solid var(--danger);
-    color: var(--danger);
-    padding: 0.5rem 1rem;
+.tech-tag {
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+    padding: 2px 8px;
     border-radius: 4px;
-    cursor: pointer;
     font-size: 0.8rem;
 }
 
+.btn-delete {
+    background: transparent;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
 .btn-delete:hover {
-    background-color: var(--danger);
+    background: var(--danger);
     color: white;
+    border-color: var(--danger);
 }
