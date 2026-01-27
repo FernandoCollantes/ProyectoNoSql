@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevTask Tracker | Ingeniería Web</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>🛠️ DevTask Tracker</h1>
+            <p>Gestor de tareas </p>
+        </header>
+
+        <section class="form-section">
+            <form id="task-form">
+                <div class="form-group">
+                    <label for="titulo">Título de la Tarea</label>
+                    <input type="text" id="titulo" placeholder="Ej: Implementar Auth JWT" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tecnologia">Tecnología</label>
+                    <select id="tecnologia">
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="Node.js">Node.js</option>
+                        <option value="MongoDB">MongoDB</option>
+                        <option value="HTML/CSS">HTML/CSS</option>
+                        <option value="Python">Python</option>
+                        <option value="Java">Java</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary">Añadir Tarea</button>
+            </form>
+        </section>
+
+        <section class="tasks-section">
+            <h2>Backlog de Tareas</h2>
+            <div id="tasks-list" class="grid-container">
+                <p class="empty-message">Cargando tareas...</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
