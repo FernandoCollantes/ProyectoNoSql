@@ -212,3 +212,37 @@ input:focus, select:focus {
     color: white;
     border-color: var(--danger);
 }
+/* --- Estilos para Update (CRUD) --- */
+
+/* Contenedor de botones de acción */
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Botón de completar */
+.btn-toggle {
+    background: transparent;
+    border: 1px solid rgba(16, 185, 129, 0.3); /* Verde sutil */
+    color: #34d399;
+    padding: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-toggle:hover {
+    background: rgba(16, 185, 129, 0.2);
+    transform: scale(1.1);
+}
+
+/* Efecto visual cuando la tarea está completada */
+.completed-task h3 {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.completed-task .tech-tag {
+    background: rgba(148, 163, 184, 0.2); /* Gris apagado */
+    color: var(--text-muted);
+}

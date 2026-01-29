@@ -26,16 +26,22 @@ async function loadTasks() {
             const card = document.createElement('div');
             card.className = 'task-card';
             
-            // Creamos el contenido de la tarjeta
+           // Verificamos si está completada para añadir estilo visual
+            const isCompleted = task.estado === 'completed';
+            
             card.innerHTML = `
-                <div class="task-info">
+                <div class="task-info ${isCompleted ? 'completed-task' : ''}">
                     <h3>${task.titulo}</h3>
                     <div class="task-meta">
-                        <span class="tech-tag">Target: ${task.tecnologia}</span> | 
-                        <span>Estado: ${task.estado}</span>
+                        <span class="tech-tag">${task.tecnologia}</span>
                     </div>
                 </div>
-                <button class="btn-delete" onclick="deleteTask('${task._id}')">Eliminar</button>
+                <div class="actions">
+                    <button class="btn-toggle" onclick="toggleTask('${task._id}')">
+                        ${isCompleted ? '↩️' : '✅'}
+                    </button>
+                    <button class="btn-delete" onclick="deleteTask('${task._id}')">🗑️</button>
+                </div>
             `;
             
             tasksList.appendChild(card);
@@ -96,3 +102,14 @@ async function deleteTask(id) {
 
 // Inicializamos la app cargando las tareas al principio
 document.addEventListener('DOMContentLoaded', loadTasks);
+// 4. Función para Cambiar Estado (UPDATE)
+async function toggleTask(id) {
+    try {
+        await fetch(`${API_URL}/${id}`, {
+            method: 'PATCH' // Usamos el nuevo método que creamos
+        });
+        loadTasks(); // Recargamos para ver el cambio
+    } catch (error) {
+        console.error('Error actualizando tarea:', error);
+    }
+}
