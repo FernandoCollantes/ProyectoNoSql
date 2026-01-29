@@ -246,3 +246,72 @@ input:focus, select:focus {
     background: rgba(148, 163, 184, 0.2); /* Gris apagado */
     color: var(--text-muted);
 }
+.date-tag {
+    margin-left: 10px;
+    font-size: 0.8rem;
+    color: var(--text-light); /* O usa un gris suave si no tienes esta variable */
+    font-style: italic;
+}
+/* --- Estilos para Botones SVG y Fechas --- */
+
+.task-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.date-tag {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    opacity: 0.8;
+}
+
+/* Contenedor de acciones */
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Base del botón icono */
+.btn-icon {
+    background: transparent;
+    border: none;
+    padding: 8px;
+    border-radius: 8px; /* Bordes suaves */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+}
+
+.btn-icon:hover {
+    transform: translateY(-2px); /* Pequeño salto al pasar el ratón */
+}
+
+/* Botón Completar (Verde) */
+.btn-toggle:hover {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399; /* Verde esmeralda */
+    box-shadow: 0 0 10px rgba(52, 211, 153, 0.2);
+}
+
+/* Botón Eliminar (Rojo) */
+.btn-delete:hover {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171; /* Rojo suave */
+    box-shadow: 0 0 10px rgba(248, 113, 113, 0.2);
+}
+
+/* Estado visual de tarea completada */
+.completed-task {
+    border-left: 4px solid #34d399; /* Borde verde */
+    background: rgba(30, 41, 59, 0.4); /* Un poco más oscuro */
+}
+
+.completed-task h3 {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}

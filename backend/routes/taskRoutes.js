@@ -44,5 +44,19 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+// 4. PATCH /api/tasks/:id - Actualizar estado de la tarea (La "U" de CRUD)
+router.patch('/:id', async (req, res) => {
+    try {
+        const task = await Task.findById(req.params.id);
+        if (!task) return res.status(404).json({ message: 'Tarea no encontrada' });
 
+        // Si estaba pendiente pasa a completed, y viceversa
+        task.estado = task.estado === 'pending' ? 'completed' : 'pending';
+        
+        const updatedTask = await task.save();
+        res.json(updatedTask);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
 module.exports = router;
